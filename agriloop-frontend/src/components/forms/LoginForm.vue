@@ -4,7 +4,7 @@
     style="height: 100vh; width: 100vw"
   >
     <v-card
-      class="mx-auto"
+      class="mx-auto elevation-5"
       prepend-icon="$vuetify"
       subtitle="LoginForm"
       width="350"
@@ -35,11 +35,9 @@
               </v-icon>
             </template>
           </v-text-field>
-          <v-btn class="mt-2" style="color: #d84315" type="submit" block
-            >Login</v-btn
-          >
+          <v-btn class="mt-2" type="submit" block>Login</v-btn>
         </v-form>
-        <div class="text-center mt-2" style="color: #5d4037">
+        <div class="text-center mt-2 mb-3">
           <span>
             Don't have an account?
             <router-link to="/register">Register</router-link>
