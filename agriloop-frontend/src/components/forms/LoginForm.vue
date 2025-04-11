@@ -17,12 +17,12 @@
         <v-form @submit.prevent="handleLogin">
           <v-text-field
             v-model="email"
-            :rules="rules"
+            :rules="[rules.required]"
             label="E-mail"
           ></v-text-field>
           <v-text-field
             v-model="password"
-            :rules="rules"
+            :rules="[rules.required]"
             :type="showPassword ? 'text' : 'password'"
             label="Password"
           >
@@ -56,6 +56,9 @@ const email = ref("");
 const password = ref("");
 const showPassword = ref(false);
 const router = useRouter();
+const rules = {
+  required: (value) => !!value || "This field is required.",
+};
 
 const togglePasswordVisibility = () => {
   showPassword.value = !showPassword.value;
