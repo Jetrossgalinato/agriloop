@@ -8,3 +8,10 @@ const routes = [
     component: LoginForm,
   },
 ];
+
+const router = createRouter({
+  history: createWebHashHistory(),
+  routes,
+});
+
+export default router;
