@@ -12,7 +12,7 @@
             <v-dialog v-model="dialog" max-width="600">
               <template v-slot:activator="{ props: activatorProps }">
                 <v-btn
-                  class="text-none font-weight-regular"
+                  class="text-none font-weight-regular mt-2"
                   prepend-icon="mdi-account"
                   text="Edit Profile"
                   variant="tonal"
@@ -29,14 +29,6 @@
 
                     <v-col cols="12" md="4" sm="6">
                       <v-text-field
-                        hint="example of helper text only on focus"
-                        label="Middle name"
-                      ></v-text-field>
-                    </v-col>
-
-                    <v-col cols="12" md="4" sm="6">
-                      <v-text-field
-                        hint="example of persistent helper text"
                         label="Last name*"
                         persistent-hint
                         required
@@ -61,33 +53,6 @@
                         type="password"
                         required
                       ></v-text-field>
-                    </v-col>
-
-                    <v-col cols="12" sm="6">
-                      <v-select
-                        :items="['0-17', '18-29', '30-54', '54+']"
-                        label="Age*"
-                        required
-                      ></v-select>
-                    </v-col>
-
-                    <v-col cols="12" sm="6">
-                      <v-autocomplete
-                        :items="[
-                          'Skiing',
-                          'Ice hockey',
-                          'Soccer',
-                          'Basketball',
-                          'Hockey',
-                          'Reading',
-                          'Writing',
-                          'Coding',
-                          'Basejump',
-                        ]"
-                        label="Interests"
-                        auto-select-first
-                        multiple
-                      ></v-autocomplete>
                     </v-col>
                   </v-row>
 
@@ -149,6 +114,7 @@ import { useRouter } from "vue-router";
 import axios from "axios";
 
 const router = useRouter();
+const dialog = ref(false);
 
 const user = ref({
   avatar: "",
