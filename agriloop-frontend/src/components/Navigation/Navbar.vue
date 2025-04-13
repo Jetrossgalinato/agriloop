@@ -177,6 +177,7 @@ const fetchUserData = async () => {
 const logout = () => {
   localStorage.removeItem("auth_token");
   localStorage.removeItem("user_id");
+  alert("You have been logged out successfully.");
   router.push("/");
 };
 

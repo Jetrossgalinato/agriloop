@@ -34,14 +34,7 @@ const routes = [
     path: "/home",
     name: "Home",
     component: Home,
-    beforeEnter: (to, from, next) => {
-      const token = localStorage.getItem("auth_token");
-      if (token) {
-        next("/");
-      } else {
-        next();
-      }
-    },
+    meta: { requiresAuth: true },
   },
   // add other routes here
 ];
@@ -49,6 +42,17 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+
+// 🔐 Auth Guard
+router.beforeEach((to, from, next) => {
+  const isAuthenticated = !!localStorage.getItem("auth_token");
+
+  if (to.meta.requiresAuth && !isAuthenticated) {
+    next({ name: "Login" }); // redirect to login if not authenticated
+  } else {
+    next(); // proceed
+  }
 });
 
 export default router;
