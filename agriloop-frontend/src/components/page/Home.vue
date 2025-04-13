@@ -1,20 +1,10 @@
 <template>
-  <v-list-item
-    prepend-icon="mdi-logout"
-    title="Logout"
-    class="sidebar-text"
-    @click="logout"
-  ></v-list-item>
+  <v-card
+    ><v-layout> <Navbar /> <v-main style="height: 100vh"> </v-main> </v-layout
+  ></v-card>
 </template>
 <script setup>
-import { ref, onMounted } from "vue";
-import { useRouter } from "vue-router";
-import axios from "axios";
-const router = useRouter();
-const logout = () => {
-  localStorage.removeItem("auth_token"); // Clear the token
-  localStorage.removeItem("user_id"); // Clear the user ID
-  router.push("/"); // Redirect to login
-};
+import Navbar from "../Navigation/Navbar.vue"; // Import the Sidebar component
+import { useRouter } from "vue-router"; // Import Vue Router
 </script>
 <style scoped></style>
