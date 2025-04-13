@@ -5,9 +5,9 @@
         <template v-slot:prepend>
           <v-list-item
             lines="two"
-            prepend-avatar="user.avatar || 'https://placehold.co/400'"
+            :prepend-avatar="user.avatar || 'https://placehold.co/400'"
             subtitle="Logged in"
-            title="user.name"
+            :title="user.name"
           >
             <span
               style="cursor: pointer; font-size: 0.875rem; color: #1976d2"
@@ -85,9 +85,6 @@ export default {
       }
     };
 
-    // Check if the user is an admin
-    const isAdmin = ref(localStorage.getItem("is_admin") === "true");
-
     // Navigate to the Edit Profile page
     const editProfile = () => {
       router.push("/edit-profile");
@@ -108,15 +105,9 @@ export default {
       router.push("/cart");
     };
 
-    // Navigate to the Admin Dashboard
-    const goToDashboard = () => {
-      router.push("/admin/dashboard");
-    };
-
     const logout = () => {
       localStorage.removeItem("auth_token"); // Clear the token
       localStorage.removeItem("user_id"); // Clear the user ID
-      localStorage.removeItem("is_admin"); // Clear the admin status
       router.push("/"); // Redirect to login
     };
 
@@ -127,12 +118,10 @@ export default {
 
     return {
       user,
-      isAdmin,
       editProfile,
       goToProfile,
       goToHome,
       goToCart,
-      goToDashboard,
       logout,
     };
   },
