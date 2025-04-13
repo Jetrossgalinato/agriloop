@@ -1,5 +1,4 @@
 <template>
-  <h1>This is the Home page</h1>
   <v-list-item
     prepend-icon="mdi-logout"
     title="Logout"
