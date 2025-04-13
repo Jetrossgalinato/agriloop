@@ -21,27 +21,27 @@ const routes = [
     path: "/register",
     name: "Register",
     component: Register,
-    // beforeEnter: (to, from, next) => {
-    //   const token = localStorage.getItem("auth_token");
-    //   if (token) {
-    //     next("/home"); // Redirect to home if the user is already logged in
-    //   } else {
-    //     next(); // Allow access to the login page
-    //   }
-    // },
+    beforeEnter: (to, from, next) => {
+      const token = localStorage.getItem("auth_token");
+      if (token) {
+        next("/home"); // Redirect to home if the user is already logged in
+      } else {
+        next(); // Allow access to the login page
+      }
+    },
   },
   {
     path: "/home",
     name: "Home",
     component: Home,
-    //   beforeEnter: (to, from, next) => {
-    //     const token = localStorage.getItem("auth_token");
-    //     if (token) {
-    //       next("/");
-    //     } else {
-    //       next();
-    //     }
-    //   },
+    beforeEnter: (to, from, next) => {
+      const token = localStorage.getItem("auth_token");
+      if (token) {
+        next("/");
+      } else {
+        next();
+      }
+    },
   },
   // add other routes here
 ];
