@@ -90,13 +90,28 @@
               class="font-weight-bold text-sm text-dark"
               style="font-size: larger"
             >
-              Supply & Product Demand:
-            </div></v-col
-          >
+              Supply & Product Demand
+            </div>
+            <v-carousel show-arrows="hover">
+              <v-carousel-item
+                src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+                cover
+              ></v-carousel-item>
+
+              <v-carousel-item
+                src="https://cdn.vuetifyjs.com/images/cards/hotel.jpg"
+                cover
+              ></v-carousel-item>
+
+              <v-carousel-item
+                src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+                cover
+              ></v-carousel-item>
+            </v-carousel>
+          </v-col>
         </v-card>
-      </v-main>
-    </v-layout></v-card
-  >
+      </v-main> </v-layout
+  ></v-card>
 </template>
 <script setup>
 import Navbar from "../Navigation/Navbar.vue"; // Import the Sidebar component
