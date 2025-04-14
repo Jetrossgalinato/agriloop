@@ -1,7 +1,12 @@
 <template>
   <v-card>
     <v-layout>
-      <v-navigation-drawer location="right" permanent>
+      <v-navigation-drawer
+        v-model="drawer"
+        :permanent="$vuetify.display.mdAndUp"
+        :temporary="!$vuetify.display.mdAndUp"
+        location="right"
+      >
         <div>
           <v-list-item
             lines="two"
@@ -114,10 +119,12 @@
           <v-list-item
             prepend-icon="mdi-view-dashboard"
             title="Dashboard"
+            @click="drawer = false"
           ></v-list-item>
           <v-list-item
             prepend-icon="mdi-account-box"
             title="Account"
+            @click="drawer = false"
           ></v-list-item>
           <v-list-item prepend-icon="mdi-gavel" title="Admin"></v-list-item>
         </v-list>
@@ -139,6 +146,7 @@ import axios from "axios";
 
 const router = useRouter();
 const dialog = ref(false);
+const drawer = ref(true);
 
 const user = ref({
   avatar: "",
