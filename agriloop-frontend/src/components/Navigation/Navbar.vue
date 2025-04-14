@@ -172,8 +172,8 @@ const fetchUserData = async () => {
     console.log("User Data:", userData);
 
     user.value.name = userData.name;
-    user.value.email = userData.email;
-    preview.value = userData.avatar;
+    user.value.avatar = userData.avatar || "";
+    console.log("avatar data: ", user.value.avatar);
   } catch (error) {
     console.error("Error fetching user data:", error);
   }
