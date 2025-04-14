@@ -8,16 +8,44 @@
             <div class="font-weight-black text-center">Market Access</div>
           </template>
           <v-divider></v-divider>
-          <v-list-item lines="two" :title="user.name" :subtitle="user.id">
+          <v-list-item>
             <template v-slot:prepend>
               <v-avatar size="80" rounded="0">
                 <v-img :src="user.avatar || 'https://placehold.co/400'" />
               </v-avatar>
             </template>
+
+            <template v-slot:default>
+              <v-row class="w-100" align="center">
+                <v-spacer></v-spacer>
+
+                <v-col cols="auto" class="text-right">
+                  <div class="font-weight-bold text-sm text-grey">Name:</div>
+                  <div class="text-subtitle-1 font-weight-bold">
+                    {{ user.name }}
+                  </div>
+
+                  <div class="font-weight-bold text-sm text-grey mt-2">
+                    Membership ID:
+                  </div>
+                  <div class="text-subtitle-2 font-weight-bold">
+                    {{ user.id }}
+                  </div>
+
+                  <div class="font-weight-bold text-sm text-grey mt-2">
+                    Membership ID:
+                  </div>
+                  <div class="text-subtitle-2 font-weight-bold">
+                    {{ user.id }}
+                  </div>
+                </v-col>
+              </v-row>
+            </template>
           </v-list-item>
         </v-card>
-      </v-main> </v-layout
-  ></v-card>
+      </v-main>
+    </v-layout></v-card
+  >
 </template>
 <script setup>
 import Navbar from "../Navigation/Navbar.vue"; // Import the Sidebar component
