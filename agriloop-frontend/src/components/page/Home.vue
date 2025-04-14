@@ -3,7 +3,7 @@
     ><v-layout>
       <Navbar />
       <v-main style="height: 100vh">
-        <v-card class="mx-auto mt-15 elevation-9" width="400">
+        <v-card class="mx-auto mt-15 elevation-9" width="500">
           <template v-slot:title>
             <div class="font-weight-black text-center">Market Access</div>
           </template>
