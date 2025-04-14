@@ -18,6 +18,7 @@ class UserController extends Controller
         }
 
         return response()->json([
+            'id' => $user->id,
             'name' => $user->name,
             'email' => $user->email,
             'avatar' => $user->avatar ? asset('storage/' . $user->avatar) : null, // Return full URL for avatar

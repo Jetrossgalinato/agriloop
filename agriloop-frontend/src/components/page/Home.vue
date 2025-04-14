@@ -8,7 +8,7 @@
             <div class="font-weight-black text-center">Market Access</div>
           </template>
           <v-divider></v-divider>
-          <v-list-item lines="two" :title="user.name">
+          <v-list-item lines="two" :title="user.name" :subtitle="user.id">
             <template v-slot:prepend>
               <v-avatar size="80" rounded="0">
                 <v-img :src="user.avatar || 'https://placehold.co/400'" />
@@ -42,6 +42,7 @@ const fetchUserData = async () => {
 
     console.log("User Data:", userData);
 
+    user.value.id = userData.id;
     user.value.name = userData.name;
     user.value.avatar = userData.avatar || "";
     console.log("avatar data: ", user.value.avatar);
