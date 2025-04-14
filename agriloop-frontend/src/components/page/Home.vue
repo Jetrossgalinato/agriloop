@@ -10,7 +10,7 @@
           <v-divider class="bg-grey-darken-10"></v-divider>
           <v-list-item>
             <template v-slot:prepend>
-              <v-avatar size="150" rounded="0">
+              <v-avatar size="150" rounded="0" class="avatar-outline">
                 <v-img :src="user.avatar || 'https://placehold.co/400'" />
               </v-avatar>
             </template>
@@ -72,8 +72,8 @@
                 :key="index"
                 class="mt-2"
               >
-                <v-avatar size="50" rounded="0" class="mr-2">
-                  <img :src="buyer.avatar" alt="Avatar" />
+                <v-avatar size="50" rounded="0" class="mr-2 avatar-outline">
+                  <v-img :src="buyer.avatar" contain />
                 </v-avatar>
                 <v-list-item-content>
                   <v-list-item-title class="font-weight-bold">
@@ -153,4 +153,9 @@ onMounted(() => {
   fetchUserData();
 });
 </script>
-<style scoped></style>
+<style scoped>
+.avatar-outline {
+  border: 1px solid #151515; /* Change the color as needed */
+  border-radius: 50%; /* Ensures the border follows the circular shape */
+}
+</style>
