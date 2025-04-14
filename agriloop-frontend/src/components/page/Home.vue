@@ -58,6 +58,15 @@
               </v-row>
             </template>
           </v-list-item>
+          <v-divider class="bg-grey-darken-10"></v-divider>
+          <v-col cols="auto" class="text-left">
+            <div
+              class="font-weight-bold text-sm text-dark"
+              style="font-size: larger"
+            >
+              Marketable Buyers:
+            </div>
+          </v-col>
         </v-card>
       </v-main>
     </v-layout></v-card
