@@ -84,6 +84,15 @@
               </v-list-item>
             </div>
           </v-col>
+          <v-divider class="bg-grey-darken-10"></v-divider>
+          <v-col cols="auto" class="text-left"
+            ><div
+              class="font-weight-bold text-sm text-dark"
+              style="font-size: larger"
+            >
+              Supply & Product Demand:
+            </div></v-col
+          >
         </v-card>
       </v-main>
     </v-layout></v-card
