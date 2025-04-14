@@ -7,7 +7,7 @@
           <template v-slot:title>
             <div class="font-weight-black text-center">Market Access</div>
           </template>
-          <v-divider></v-divider>
+          <v-divider class="bg-grey-darken-10"></v-divider>
           <v-list-item>
             <template v-slot:prepend>
               <v-avatar size="80" rounded="0">
@@ -38,6 +38,22 @@
                   <div class="text-subtitle-2 font-weight-bold">
                     {{ user.location }}
                   </div>
+
+                  <div class="font-weight-bold text-sm text-grey mt-2">
+                    Membership Status:
+                  </div>
+                  <div
+                    class="text-subtitle-2 font-weight-bold mb-3"
+                    :class="{
+                      'text-green':
+                        user.membership_status?.toLowerCase() === 'active',
+                      'text-red':
+                        user.membership_status?.toLowerCase() === 'inactive',
+                      'text-uppercase': true,
+                    }"
+                  >
+                    {{ user.membership_status }}
+                  </div>
                 </v-col>
               </v-row>
             </template>
@@ -59,6 +75,7 @@ const user = ref({
   name: "",
   email: "",
   location: "",
+  membership_status: "",
 });
 
 const fetchUserData = async () => {
@@ -74,6 +91,7 @@ const fetchUserData = async () => {
     user.value.id = userData.id;
     user.value.name = userData.name;
     user.value.location = userData.location;
+    user.value.membership_status = userData.membership_status;
     user.value.avatar = userData.avatar || "";
     console.log("avatar data: ", user.value.avatar);
   } catch (error) {

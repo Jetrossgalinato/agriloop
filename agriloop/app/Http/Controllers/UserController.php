@@ -21,6 +21,7 @@ class UserController extends Controller
             'id' => $user->id,
             'name' => $user->name,
             'location' => $user->location,
+            'membership_status' => $user->membership_status,
             'email' => $user->email,
             'avatar' => $user->avatar ? asset('storage/' . $user->avatar) : null, // Return full URL for avatar
         ], 200);
