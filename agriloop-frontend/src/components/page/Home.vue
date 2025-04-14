@@ -33,10 +33,10 @@
                   </div>
 
                   <div class="font-weight-bold text-sm text-grey mt-2">
-                    Membership ID:
+                    Location:
                   </div>
                   <div class="text-subtitle-2 font-weight-bold">
-                    {{ user.id }}
+                    {{ user.location }}
                   </div>
                 </v-col>
               </v-row>
@@ -58,6 +58,7 @@ const user = ref({
   avatar: "",
   name: "",
   email: "",
+  location: "",
 });
 
 const fetchUserData = async () => {
@@ -72,6 +73,7 @@ const fetchUserData = async () => {
 
     user.value.id = userData.id;
     user.value.name = userData.name;
+    user.value.location = userData.location;
     user.value.avatar = userData.avatar || "";
     console.log("avatar data: ", user.value.avatar);
   } catch (error) {
