@@ -33,6 +33,7 @@
                         v-model="user.name"
                         label="Full Name*"
                         required
+                        @input="checkChanges"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" md="4" sm="6">
@@ -40,6 +41,7 @@
                         v-model="user.email"
                         label="Email*"
                         required
+                        @input="checkChanges"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" md="4" sm="6">
@@ -47,6 +49,7 @@
                         v-model="user.location"
                         label="Location*"
                         required
+                        @input="checkChanges"
                       ></v-text-field>
                     </v-col>
 
@@ -79,6 +82,7 @@
                         :append-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
                         @click:append="togglePasswordVisibility"
                         outlined
+                        @input="checkChanges"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" md="4" sm="6">
@@ -87,6 +91,7 @@
                         label="Upload Avatar"
                         accept="image/*"
                         @change="previewAvatar"
+                        @input="checkChanges"
                       ></v-file-input>
                     </v-col>
                   </v-row>
@@ -112,7 +117,7 @@
                     text="Save"
                     variant="tonal"
                     @click="updateProfile"
-                    :disabled="!valid"
+                    :disabled="!isFormValid"
                   ></v-btn>
                 </v-card-actions>
               </v-card>
@@ -147,7 +152,7 @@
   </v-card>
 </template>
 <script setup>
-import { ref, reactive, onMounted } from "vue";
+import { ref, reactive, onMounted, computed } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
 
@@ -177,6 +182,18 @@ const rules = {
   email: (value) => /.+@.+\..+/.test(value) || "E-mail must be valid.",
 };
 
+const isFormValid = computed(() => {
+  return (
+    user.value.name &&
+    user.value.email &&
+    user.value.location &&
+    (user.value.avatar ||
+      passwords.current_password ||
+      passwords.new_password ||
+      passwords.confirm_password)
+  );
+});
+
 const fetchUserData = async () => {
   try {
     const userId = localStorage.getItem("user_id") || 1;
@@ -201,11 +218,11 @@ const updateProfile = async () => {
   try {
     const userId = localStorage.getItem("user_id");
     const formData = new FormData();
-    formData.append("name", user.name);
-    formData.append("email", user.email);
-    formData.append("location", user.location);
-    if (user.avatar) {
-      formData.append("avatar", user.avatar);
+    formData.append("name", user.value.name); // Use user.value
+    formData.append("email", user.value.email);
+    formData.append("location", user.value.location);
+    if (user.value.avatar) {
+      formData.append("avatar", user.value.avatar);
     }
 
     // Validate and include password fields
@@ -226,7 +243,7 @@ const updateProfile = async () => {
       formData.append("new_password", passwords.new_password);
     }
 
-    await axios.post(
+    const response = await axios.post(
       `http://localhost:8000/api/user/${userId}/update`,
       formData,
       {
@@ -236,6 +253,7 @@ const updateProfile = async () => {
       }
     );
 
+    console.log("Response from API:", response.data); // Log the response
     alert("Profile updated successfully!");
     router.push("/home"); // Redirect to home after saving
   } catch (error) {
