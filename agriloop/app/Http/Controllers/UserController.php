@@ -36,6 +36,7 @@ class UserController extends Controller
         // Update user fields
         $user->name = $request->input('name');
         $user->email = $request->input('email');
+        $user->location = $request->input('location');
 
         // Handle avatar upload
         if ($request->hasFile('avatar')) {

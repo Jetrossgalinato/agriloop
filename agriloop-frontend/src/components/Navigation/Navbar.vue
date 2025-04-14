@@ -42,6 +42,13 @@
                         required
                       ></v-text-field>
                     </v-col>
+                    <v-col cols="12" md="4" sm="6">
+                      <v-text-field
+                        v-model="user.location"
+                        label="Location*"
+                        required
+                      ></v-text-field>
+                    </v-col>
 
                     <v-col cols="12" md="4" sm="6">
                       <v-text-field
@@ -131,7 +138,7 @@
 
         <template v-slot:append>
           <div class="pa-2" @click="logout">
-            <v-btn block> Logout </v-btn>
+            <v-btn block elevation="6"> Logout </v-btn>
           </div>
         </template>
       </v-navigation-drawer>
@@ -152,6 +159,7 @@ const user = ref({
   avatar: "",
   name: "",
   email: "",
+  location: "",
 });
 
 const passwords = reactive({
@@ -180,6 +188,8 @@ const fetchUserData = async () => {
     console.log("User Data:", userData);
 
     user.value.name = userData.name;
+    user.value.email = userData.email;
+    user.value.location = userData.location;
     user.value.avatar = userData.avatar || "";
     console.log("avatar data: ", user.value.avatar);
   } catch (error) {
@@ -193,6 +203,7 @@ const updateProfile = async () => {
     const formData = new FormData();
     formData.append("name", user.name);
     formData.append("email", user.email);
+    formData.append("location", user.location);
     if (user.avatar) {
       formData.append("avatar", user.avatar);
     }
