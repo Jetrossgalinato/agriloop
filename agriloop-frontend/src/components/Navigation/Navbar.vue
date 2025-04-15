@@ -241,6 +241,7 @@
                         {{ update.timestamp }}
                       </div>
                     </v-list-item-content>
+                    <v-divider></v-divider>
                   </v-list-item>
                 </v-list>
               </v-card-text>
