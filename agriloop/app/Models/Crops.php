@@ -13,4 +13,8 @@ class Crops extends Model
 
     protected $appends = ['image_url']; // 👈 This makes image_url appear in JSON
 
+    public function getImageUrlAttribute()
+    {
+        return asset('storage/' . $this->image); // Adjust path if needed
+    }
 }

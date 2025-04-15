@@ -93,31 +93,18 @@
               Supply & Product Demand:
             </div>
             <v-carousel show-arrows="hover">
-              <v-carousel-item v-for="meal in meals" :key="meal.id">
+              <v-carousel-item v-for="crop in crops" :key="crop.id">
                 <v-card class="mx-auto" max-width="400" elevation="10">
                   <v-img
-                    :src="meal.image || `https://placehold.co/400`"
-                    alt="Meal Image"
+                    :src="crop.image || 'https://placehold.co/400'"
+                    alt="Crop Image"
                     height="200px"
                     cover
                   ></v-img>
-                  <v-card-title>{{ meal.name }}</v-card-title>
+                  <v-card-title>{{ crop.name }}</v-card-title>
                   <v-card-text>
-                    <p>{{ meal.description }}</p>
-                    <p>
-                      <strong>Price:</strong> ${{
-                        parseFloat(meal.price).toFixed(2)
-                      }}
-                    </p>
+                    <p>{{ crop.description }}</p>
                   </v-card-text>
-                  <v-card-actions>
-                    <v-btn color="#D84315" @click="goToMealPlan(meal)">
-                      Subscribe
-                    </v-btn>
-                    <v-btn color="#8D6E63" @click="addToCart(meal)">
-                      Add to Cart
-                    </v-btn>
-                  </v-card-actions>
                 </v-card>
               </v-carousel-item>
             </v-carousel>
@@ -139,6 +126,7 @@ import bobAvatar from "@/assets/bob.jpg";
 import charlieAvatar from "@/assets/charlie.jpg";
 
 const router = useRouter();
+const crops = ref([]);
 
 const user = ref({
   avatar: "",
@@ -187,8 +175,22 @@ const fetchUserData = async () => {
   }
 };
 
+const fetchCrops = async () => {
+  try {
+    const response = await fetch("http://localhost:8000/api/crops");
+    const data = await response.json();
+    crops.value = data.map((crops) => ({
+      ...crops,
+      image: crops.image || "default-image-path.jpg",
+    }));
+  } catch (error) {
+    console.error("Error fetching crops:", error);
+  }
+};
+
 onMounted(() => {
   fetchUserData();
+  fetchCrops();
 });
 </script>
 <style scoped>
