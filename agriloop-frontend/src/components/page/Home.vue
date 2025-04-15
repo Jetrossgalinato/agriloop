@@ -10,7 +10,10 @@
             </v-btn>
           </template>
           <template v-slot:default="{ isActive }">
-            <v-card title="Notifications">
+            <v-card>
+              <template v-slot:title>
+                <span class="font-weight-bold">Notifications</span>
+              </template>
               <v-list>
                 <v-list-item
                   v-for="(notification, index) in notifications"
@@ -29,10 +32,7 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
 
-                <v-btn
-                  text="Close Dialog"
-                  @click="isActive.value = false"
-                ></v-btn>
+                <v-btn text="Close" @click="isActive.value = false"></v-btn>
               </v-card-actions>
             </v-card>
           </template>
@@ -196,8 +196,30 @@ const buyers = ref([
 ]);
 
 const notifications = ref([
-  { title: "New Message", message: "You have received a new message." },
-  { title: "Update Available", message: "A new version is available." },
+  {
+    title: "New Buyer Added",
+    message: "John Doe has joined as a buyer from Davao Region.",
+  },
+  {
+    title: "New Product Request",
+    message: "A buyer is requesting 100kg of Organic Mangoes.",
+  },
+  {
+    title: "Price Alert",
+    message: "The price of Rice has dropped by 10% in the local market.",
+  },
+  {
+    title: "New Buyer Added",
+    message: "Maria Santos from Bicol Region is now looking for suppliers.",
+  },
+  {
+    title: "Product Request",
+    message: "Need 200kg of fresh tomatoes by next week.",
+  },
+  {
+    title: "Price Alert",
+    message: "Corn prices increased by ₱2.50 per kilo.",
+  },
 ]);
 
 const fetchUserData = async () => {
