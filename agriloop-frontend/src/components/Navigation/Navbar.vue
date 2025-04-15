@@ -129,10 +129,41 @@
 
         <v-list color="transparent">
           <v-list-item
-            prepend-icon="mdi-view-dashboard"
-            title="Dashboard"
-            @click="drawer = false"
+            prepend-icon="mdi-message-text"
+            title="Messages"
+            @click="messageDialog = true"
           ></v-list-item>
+
+          <v-dialog v-model="messageDialog" max-width="600">
+            <v-card>
+              <v-card-title class="text-h6 font-weight-bold"
+                >Messages</v-card-title
+              >
+              <v-divider></v-divider>
+              <v-card-text>
+                <!-- Example message content -->
+                <v-list>
+                  <v-list-item v-for="(msg, index) in messages" :key="index">
+                    <v-list-item-content>
+                      <v-list-item-title class="font-weight-bold">
+                        {{ msg.sender }}
+                      </v-list-item-title>
+                      <v-list-item-subtitle>{{
+                        msg.text
+                      }}</v-list-item-subtitle>
+                    </v-list-item-content>
+                    <v-divider></v-divider>
+                  </v-list-item>
+                </v-list>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="primary" @click="messageDialog = false"
+                  >Close</v-btn
+                >
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
           <v-list-item
             prepend-icon="mdi-account-box"
             title="Account"
@@ -159,6 +190,7 @@ import axios from "axios";
 const router = useRouter();
 const dialog = ref(false);
 const drawer = ref(true);
+const messageDialog = ref(false);
 
 const user = ref({
   avatar: "",
@@ -166,6 +198,12 @@ const user = ref({
   email: "",
   location: "",
 });
+
+const messages = ref([
+  { sender: "Alice", text: "Hello! I’m interested in your products." },
+  { sender: "Bob", text: "Can we discuss pricing?" },
+  { sender: "Charlie", text: "When is the next delivery?" },
+]);
 
 const passwords = reactive({
   current_password: "",
