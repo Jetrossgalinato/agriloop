@@ -90,28 +90,42 @@
               class="font-weight-bold text-sm text-dark"
               style="font-size: larger"
             >
-              Supply & Product Demand
+              Supply & Product Demand:
             </div>
             <v-carousel show-arrows="hover">
-              <v-carousel-item
-                src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-                cover
-              ></v-carousel-item>
-
-              <v-carousel-item
-                src="https://cdn.vuetifyjs.com/images/cards/hotel.jpg"
-                cover
-              ></v-carousel-item>
-
-              <v-carousel-item
-                src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
-                cover
-              ></v-carousel-item>
+              <v-carousel-item v-for="meal in meals" :key="meal.id">
+                <v-card class="mx-auto" max-width="400" elevation="10">
+                  <v-img
+                    :src="meal.image || `https://placehold.co/400`"
+                    alt="Meal Image"
+                    height="200px"
+                    cover
+                  ></v-img>
+                  <v-card-title>{{ meal.name }}</v-card-title>
+                  <v-card-text>
+                    <p>{{ meal.description }}</p>
+                    <p>
+                      <strong>Price:</strong> ${{
+                        parseFloat(meal.price).toFixed(2)
+                      }}
+                    </p>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-btn color="#D84315" @click="goToMealPlan(meal)">
+                      Subscribe
+                    </v-btn>
+                    <v-btn color="#8D6E63" @click="addToCart(meal)">
+                      Add to Cart
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-carousel-item>
             </v-carousel>
           </v-col>
         </v-card>
-      </v-main> </v-layout
-  ></v-card>
+      </v-main>
+    </v-layout></v-card
+  >
 </template>
 <script setup>
 import Navbar from "../Navigation/Navbar.vue"; // Import the Sidebar component
