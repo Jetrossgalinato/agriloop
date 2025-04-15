@@ -165,10 +165,53 @@
             </v-card>
           </v-dialog>
           <v-list-item
-            prepend-icon="mdi-account-box"
-            title="Account"
-            @click="drawer = false"
+            prepend-icon="mdi-cart-check"
+            title="Order Confirmation"
+            @click="orderDialog = true"
           ></v-list-item>
+
+          <v-dialog v-model="orderDialog" max-width="600" max-height="800">
+            <v-card>
+              <v-card-title class="text-h6 font-weight-bold">
+                Order Confirmations
+              </v-card-title>
+              <v-divider></v-divider>
+              <v-card-text>
+                <!-- Sample order confirmations -->
+                <v-list>
+                  <v-list-item v-for="(order, index) in orders" :key="index">
+                    <v-list-item-content>
+                      <v-list-item-title class="font-weight-bold">
+                        Order #{{ order.id }} - {{ order.product }}
+                      </v-list-item-title>
+                      <div class="text-body-2" style="white-space: normal">
+                        <strong>Buyer:</strong> {{ order.buyer }} <br />
+                        <strong>Quantity:</strong> {{ order.quantity }} <br />
+                        <strong>Status:</strong>
+                        <span
+                          :class="
+                            order.status === 'Confirmed'
+                              ? 'text-green'
+                              : 'text-red'
+                          "
+                          class="font-weight-medium"
+                        >
+                          {{ order.status }}
+                        </span>
+                      </div>
+                    </v-list-item-content>
+                    <v-divider></v-divider>
+                  </v-list-item>
+                </v-list>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="primary" @click="orderDialog = false"
+                  >Close</v-btn
+                >
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
           <v-list-item prepend-icon="mdi-gavel" title="Admin"></v-list-item>
         </v-list>
 
@@ -191,6 +234,7 @@ const router = useRouter();
 const dialog = ref(false);
 const drawer = ref(true);
 const messageDialog = ref(false);
+const orderDialog = ref(false);
 
 const user = ref({
   avatar: "",
@@ -203,6 +247,30 @@ const messages = ref([
   { sender: "Alice", text: "Hello! I’m interested in your products." },
   { sender: "Bob", text: "Can we discuss pricing?" },
   { sender: "Charlie", text: "When is the next delivery?" },
+]);
+
+const orders = ref([
+  {
+    id: 101,
+    product: "Fresh Mangoes",
+    buyer: "Maria Lopez",
+    quantity: "25 kg",
+    status: "Confirmed",
+  },
+  {
+    id: 102,
+    product: "Organic Rice",
+    buyer: "Daniel Reyes",
+    quantity: "100 kg",
+    status: "Confirmed",
+  },
+  {
+    id: 103,
+    product: "Banana Chips",
+    buyer: "Sofia Cruz",
+    quantity: "50 packs",
+    status: "Confirmed",
+  },
 ]);
 
 const passwords = reactive({
@@ -326,4 +394,8 @@ onMounted(() => {
   fetchUserData();
 });
 </script>
-<style></style>
+<style>
+.v-list-item-subtitle {
+  white-space: normal !important;
+}
+</style>
