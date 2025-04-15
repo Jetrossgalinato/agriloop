@@ -3,18 +3,14 @@
     ><v-layout>
       <Navbar />
       <v-main style="height: 100vh; overflow-y: auto">
-        <v-card class="mx-auto mt-15 elevation-9" width="600">
-          <template v-slot:title>
-            <div class="font-weight-black text-center mb-4 mt-4">
-              Market Access
-            </div>
-            <v-spacer></v-spacer>
-            <v-menu offset-y>
-              <template v-slot:activator="{ on }">
-                <v-btn icon v-on="on" class="notification-btn">
-                  <v-icon>mdi-bell</v-icon>
-                </v-btn>
-              </template>
+        <v-dialog max-width="500">
+          <template v-slot:activator="{ props: activatorProps }">
+            <v-btn icon v-bind="activatorProps" class="notification-btn">
+              <v-icon>mdi-bell</v-icon>
+            </v-btn>
+          </template>
+          <template v-slot:default="{ isActive }">
+            <v-card title="Notifications">
               <v-list>
                 <v-list-item
                   v-for="(notification, index) in notifications"
@@ -30,7 +26,23 @@
                   </v-list-item-content>
                 </v-list-item>
               </v-list>
-            </v-menu>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+
+                <v-btn
+                  text="Close Dialog"
+                  @click="isActive.value = false"
+                ></v-btn>
+              </v-card-actions>
+            </v-card>
+          </template>
+        </v-dialog>
+        <v-card class="mx-auto mt-15 elevation-9" width="600">
+          <template v-slot:title>
+            <div class="font-weight-black text-center mb-4 mt-4">
+              Market Access
+            </div>
+            <v-spacer></v-spacer>
           </template>
           <v-divider class="bg-grey-darken-10"></v-divider>
           <v-list-item>
