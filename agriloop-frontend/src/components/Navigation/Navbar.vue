@@ -11,9 +11,11 @@
           <v-list-item
             lines="two"
             :prepend-avatar="user.avatar || 'https://placehold.co/400'"
-            subtitle="Logged in"
             :title="user.name"
           >
+            <template v-slot:subtitle>
+              <span class="text-green">Logged in</span>
+            </template>
             <v-dialog v-model="dialog" max-width="600">
               <template v-slot:activator="{ props: activatorProps }">
                 <v-btn

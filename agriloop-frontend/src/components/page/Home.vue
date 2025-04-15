@@ -2,7 +2,7 @@
   <v-card
     ><v-layout>
       <Navbar />
-      <v-main style="height: 100vh; overflow-y: auto">
+      <v-main class="main-background" style="height: 100vh; overflow-y: auto">
         <v-dialog max-width="500">
           <template v-slot:activator="{ props: activatorProps }">
             <v-btn icon v-bind="activatorProps" class="notification-btn">
@@ -39,7 +39,7 @@
         </v-dialog>
         <v-card class="mx-auto mt-15 elevation-9" width="600">
           <template v-slot:title>
-            <div class="font-weight-black text-center mb-4 mt-4">
+            <div class="font-weight-black text-green text-center mb-4 mt-4">
               Market Access
             </div>
             <v-spacer></v-spacer>
@@ -98,7 +98,7 @@
           <v-divider class="bg-grey-darken-10"></v-divider>
           <v-col cols="auto" class="text-left">
             <div
-              class="font-weight-bold text-sm text-dark"
+              class="font-weight-bold text-green text-sm text-dark"
               style="font-size: larger"
             >
               Marketable Buyers:
@@ -124,12 +124,16 @@
           <v-divider class="bg-grey-darken-10"></v-divider>
           <v-col cols="auto" class="text-left">
             <div
-              class="font-weight-bold text-sm text-dark mb-0"
+              class="font-weight-bold text-green text-sm text-dark mb-0"
               style="font-size: larger; margin-bottom: 0"
             >
               Supply & Product Demand:
             </div>
-            <v-carousel show-arrows="hover" class="mt-0">
+            <v-carousel
+              class="mt-0"
+              :show-delimiters="false"
+              show-arrows="hover"
+            >
               <v-carousel-item v-for="crop in crops" :key="crop.id">
                 <v-card
                   class="mx-auto customcard"
@@ -273,5 +277,25 @@ onMounted(() => {
   position: absolute;
   top: 16px;
   right: 16px;
+}
+.main-background {
+  background-image: url("../images/main-background.jpg"); /* your image */
+  background-size: 100% 100%; /* fills the area without cropping or zooming */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 2rem 0;
+  position: relative; /* ensure layering works */
+}
+
+.main-background::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.3); /* optional overlay */
+  z-index: -1;
 }
 </style>
