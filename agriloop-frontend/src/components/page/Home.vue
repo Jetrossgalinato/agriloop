@@ -94,7 +94,11 @@
             </div>
             <v-carousel show-arrows="hover">
               <v-carousel-item v-for="crop in crops" :key="crop.id">
-                <v-card class="mx-auto" max-width="400" elevation="10">
+                <v-card
+                  class="mx-auto customcard"
+                  max-width="400"
+                  elevation="10"
+                >
                   <v-img
                     :src="crop.image || 'https://placehold.co/400'"
                     alt="Crop Image"
@@ -197,5 +201,8 @@ onMounted(() => {
 .avatar-outline {
   border: 1px solid #151515; /* Change the color as needed */
   border-radius: 50%; /* Ensures the border follows the circular shape */
+}
+.customcard {
+  margin-top: 80px;
 }
 </style>
