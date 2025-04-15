@@ -5,7 +5,32 @@
       <v-main style="height: 100vh; overflow-y: auto">
         <v-card class="mx-auto mt-15 elevation-9" width="600">
           <template v-slot:title>
-            <div class="font-weight-black text-center">Market Access</div>
+            <div class="font-weight-black text-center mb-4 mt-4">
+              Market Access
+            </div>
+            <v-spacer></v-spacer>
+            <v-menu offset-y>
+              <template v-slot:activator="{ on }">
+                <v-btn icon v-on="on" class="notification-btn">
+                  <v-icon>mdi-bell</v-icon>
+                </v-btn>
+              </template>
+              <v-list>
+                <v-list-item
+                  v-for="(notification, index) in notifications"
+                  :key="index"
+                >
+                  <v-list-item-content>
+                    <v-list-item-title>{{
+                      notification.title
+                    }}</v-list-item-title>
+                    <v-list-item-subtitle>{{
+                      notification.message
+                    }}</v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list>
+            </v-menu>
           </template>
           <v-divider class="bg-grey-darken-10"></v-divider>
           <v-list-item>
@@ -85,14 +110,14 @@
             </div>
           </v-col>
           <v-divider class="bg-grey-darken-10"></v-divider>
-          <v-col cols="auto" class="text-left"
-            ><div
-              class="font-weight-bold text-sm text-dark"
-              style="font-size: larger"
+          <v-col cols="auto" class="text-left">
+            <div
+              class="font-weight-bold text-sm text-dark mb-0"
+              style="font-size: larger; margin-bottom: 0"
             >
               Supply & Product Demand:
             </div>
-            <v-carousel show-arrows="hover">
+            <v-carousel show-arrows="hover" class="mt-0">
               <v-carousel-item v-for="crop in crops" :key="crop.id">
                 <v-card
                   class="mx-auto customcard"
@@ -158,6 +183,11 @@ const buyers = ref([
   },
 ]);
 
+const notifications = ref([
+  { title: "New Message", message: "You have received a new message." },
+  { title: "Update Available", message: "A new version is available." },
+]);
+
 const fetchUserData = async () => {
   try {
     const userId = localStorage.getItem("user_id") || 1;
@@ -203,6 +233,11 @@ onMounted(() => {
   border-radius: 50%; /* Ensures the border follows the circular shape */
 }
 .customcard {
-  margin-top: 80px;
+  margin-top: 100px;
+}
+.notification-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
 }
 </style>
