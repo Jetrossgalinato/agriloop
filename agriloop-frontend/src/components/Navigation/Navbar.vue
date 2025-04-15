@@ -212,7 +212,46 @@
               </v-card-actions>
             </v-card>
           </v-dialog>
-          <v-list-item prepend-icon="mdi-gavel" title="Admin"></v-list-item>
+          <v-list-item
+            prepend-icon="mdi-update"
+            title="Market Updates"
+            @click="marketDialog = true"
+          />
+
+          <v-dialog v-model="marketDialog" max-width="600" persistent>
+            <v-card>
+              <v-card-title class="text-h6 font-weight-bold">
+                Market Updates
+              </v-card-title>
+              <v-divider></v-divider>
+              <v-card-text>
+                <v-list>
+                  <v-list-item
+                    v-for="(update, index) in marketUpdates"
+                    :key="index"
+                  >
+                    <v-list-item-content>
+                      <v-list-item-title class="font-weight-bold">
+                        {{ update.title }}
+                      </v-list-item-title>
+                      <div class="text-body-2" style="white-space: normal">
+                        {{ update.details }}
+                      </div>
+                      <div class="text-caption text-grey mt-1">
+                        {{ update.timestamp }}
+                      </div>
+                    </v-list-item-content>
+                  </v-list-item>
+                </v-list>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer />
+                <v-btn color="primary" @click="marketDialog = false"
+                  >Close</v-btn
+                >
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
         </v-list>
 
         <template v-slot:append>
@@ -235,6 +274,7 @@ const dialog = ref(false);
 const drawer = ref(true);
 const messageDialog = ref(false);
 const orderDialog = ref(false);
+const marketDialog = ref(false);
 
 const user = ref({
   avatar: "",
@@ -270,6 +310,24 @@ const orders = ref([
     buyer: "Sofia Cruz",
     quantity: "50 packs",
     status: "Confirmed",
+  },
+]);
+
+const marketUpdates = ref([
+  {
+    title: "Price Increase - Corn",
+    details: "Corn price increased by 8% due to high demand.",
+    timestamp: "April 15, 2025 · 9:00 AM",
+  },
+  {
+    title: "New Product Added - Avocados",
+    details: "Avocados are now available in the market listings.",
+    timestamp: "April 14, 2025 · 4:30 PM",
+  },
+  {
+    title: "Rainfall Alert",
+    details: "Upcoming heavy rains may affect rice harvesting next week.",
+    timestamp: "April 13, 2025 · 6:45 PM",
   },
 ]);
 
