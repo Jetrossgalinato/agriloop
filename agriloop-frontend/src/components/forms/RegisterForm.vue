@@ -1,6 +1,6 @@
 <template>
   <v-card
-    class="d-flex justify-center align-center"
+    class="d-flex justify-center align-center background-image"
     style="height: 100vh; width: 100vw"
   >
     <v-card
@@ -94,4 +94,9 @@ const handleRegister = async () => {
   }
 };
 </script>
-<style></style>
+<style>
+.background-image {
+  background-image: url("../images/login-background.jpg");
+  background-position: center;
+}
+</style>
